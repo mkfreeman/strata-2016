@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Demo 1</title>
+
+	<!-- Libraries -->
+	<script src="https://code.jquery.com/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.css" />
+
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="css/main.css" />
+
+	<!-- script file -->
+	<script src="js/main.js"></script>
+
+</head>
+
+<body class="container">
+	<!-- Header text -->
+	<h1>Demo 1</h1>
+	<p>This demo shows how generalizable getter/setter methods can be used on an object</p>
+	<p>Manipulate the <code>input</code> elements below to change the <code>course</code> object</p>
+	<br/>
+
+	<!-- Form of inputs -->
+	<form>
+		<div class="input-field col s6">
+			<input id="instructor" type="text" class="validate">
+			<label for="instructor">Instructor</label>
+		</div>
+		<div class="input-field col s6">
+			<input id="credits" type="number" class="validate">
+			<label for="credits">credits</label>
+		</div>
+		<div class="input-field col s6">
+			<input id="department" type="text" class="validate">
+			<label for="department">Department</label>
+		</div>
+	</form>
+
+	<!-- Display object -->
+	<h2>Course Object:</h2>
+	<pre id="course-text">
+	</pre>
+</body>
+
+</html>
