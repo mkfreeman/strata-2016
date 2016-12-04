@@ -5,7 +5,7 @@ import './ScatterPlot.css';
 import ScatterPlot from './ScatterPlot';
 
 // Scatterplot component
-var ScatterPlotComponent = React.createClass({
+var SmallMultiples = React.createClass({
     componentDidMount(){
         // Define scatterplot function
         this.scatter = ScatterPlot()
@@ -15,29 +15,26 @@ var ScatterPlotComponent = React.createClass({
     update() {
         // Update parameters
         this.scatter
-            .width(window.innerWidth * .9)
-            .height(window.innerHeight - 130)
+            .width(this.props.width)
+            .height(this.props.height)
             .fill('blue')
             .xTitle(this.props.xTitle)
             .yTitle(this.props.yTitle)
-            .radius((d) => d.selected == true ? 6 : 1);
+            .radius((d) => d.selected === true ? 6 : 1);
 
         // Call d3 update
-        // Call d3 update
-        console.log(this.props.data)
         var charts = d3.select(this.root)
                        .selectAll('.chart')
-                       .data(this.props.data)
+                       .data(this.props.data, (d) => d.key)
 
-                       // something with another selection?
-        charts
-            .enter()
+        // Enter new charts
+        charts.enter()
             .append('div')
             .attr('class', 'chart')
+            .merge(charts)
             .call(this.scatter);
 
-
-charts.exit().remove()
+        charts.exit().remove()
     },
     // Update on new props
     componentWillReceiveProps (props){
@@ -56,4 +53,4 @@ charts.exit().remove()
 	}
 });
 
-export default ScatterPlotComponent;
+export default SmallMultiples;

@@ -1,8 +1,9 @@
 // Application
 import React from 'react';
 import * as d3 from 'd3';
-import ScatterPlotComponent from './ScatterPlotComponent'
+import SmallMultiples from './SmallMultiples'
 import Controls from './Controls';
+import './App.css';
 var App = React.createClass({
     getInitialState() {
         return {
@@ -33,7 +34,6 @@ var App = React.createClass({
         // Prep data
         let chartData = this.state.data.map((d) => {
             let selected = d[this.state.idVar].toLowerCase().match(this.state.search) !== null;
-            console.log(selected)
             return {
                 x:d[this.state.xVar],
                 y:d[this.state.yVar],
@@ -45,39 +45,30 @@ var App = React.createClass({
 
         // nest data
         let nest = d3.nest().key((d) => d.group);
-        let nestedData = nest.entries(chartData);
-
-        let titleMap = {
-            gdp:'Gross Domestic Product',
-            life_expectancy:'Life expectancy in 2014',
-            fertility_rate:'Fertility Rate'
-        };
-
-        let titles = {
-            x:titleMap[this.state.xVar],
-            y:titleMap[this.state.yVar]
-        };
+        let nestedData = nest.entries(chartData)
+                        .sort(function(a,b){
+                            let aKey = a.key == 'Under 5' ? '0' : a.key;
+                            let bKey = b.key == 'Under 5' ? '0' : b.key;
+                            return Number(aKey.split(' ')[0]) - Number(bKey.split(' ')[0])
+                        });
 
 		// Return ScatterPlot element
 		return (
 
             <div>
+                <nav>Disease Burden in India</nav>
                 <Controls
-                    changeX={this.changeX}
-                    changeY={this.changeY}
-                    xVar={this.state.xVar}
-                    yVar={this.state.yVar}
                     search={this.search}
                 />
-                {this.state.data.length !=0 &&
+                {this.state.data.length !==0 &&
                     <div className="App">
-                        <ScatterPlotComponent
-                            xTitle={titles.x}
-                            yTitle={titles.y}
+                        <SmallMultiples
+                            xTitle="YLLs"
+                            yTitle="YLDs"
                             search={this.state.search}
                             data={nestedData}
-                            width={window.innerWidth * .7}
-                            height={window.innerHeight * .9} />
+                            width={window.innerWidth / 3}
+                            height={window.innerHeight / 2} />
                     </div>
                 }
 

@@ -17,28 +17,11 @@ var Controls = React.createClass({
 		return (
             <MuiThemeProvider>
                 <div className="controls">
-                    <SelectField
-                        floatingLabelText="X Axis Variable"
-                        value={this.props.xVar}
-                        onChange={this.props.changeX}
-                    >
-                        <MenuItem value={'gdp'} primaryText="Gross Domestic Product" />
-                        <MenuItem value={'fertility_rate'} primaryText="Fertility" />
-                        <MenuItem value={'life_expectancy'} primaryText="Life Expectancy" />
-                    </SelectField>
-                    <SelectField
-                        floatingLabelText="Y Axis Variable"
-                        value={this.props.yVar}
-                        onChange={this.props.changeY}
-                    >
-                        <MenuItem value={'gdp'} primaryText="Gross Domestic Product" />
-                        <MenuItem value={'fertility_rate'} primaryText="Fertility" />
-                        <MenuItem value={'life_expectancy'} primaryText="Life Expectancy" />
-                    </SelectField>
                     <br/>
                     <TextField
-                        hintText="Find a country"
+                        hintText="Find a disease"
                         onChange={this.props.search}
+						width='500px'
                     />
                 </div>
             </MuiThemeProvider>
