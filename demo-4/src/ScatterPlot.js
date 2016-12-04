@@ -1,7 +1,6 @@
 // ScatterPlot
 import * as d3 from 'd3';
 import d3tip from 'd3-tip';
-console.log(d3.axisBottom)
 
 var ScatterPlot = function() {
     // Set default values
@@ -12,6 +11,7 @@ var ScatterPlot = function() {
         xTitle = 'X Axis Title',
         yTitle = 'Y Axis Title',
         fill = 'green',
+        radius = (d) => 6,
         margin = {
             left:70,
             bottom:50,
@@ -81,12 +81,12 @@ var ScatterPlot = function() {
             ele.select('svg').call(tip);
 
             // Calculate x and y scales
-            let xMax = d3.max(data, function(d){return +d.x})*1.05;
-            let xMin = d3.min(data, function(d){return +d.x})*.95;
+            let xMax = d3.max(data, (d) => +d.x) * 1.05;
+            let xMin = d3.min(data, (d) => +d.x) * .95;
             xScale.range([0, chartWidth]).domain([xMin, xMax]);
 
-            var yMin = d3.min(data, function(d){return +d.y})*.95;
-            var yMax = d3.max(data, function(d){return +d.y})*1.05;
+            var yMin = d3.min(data, (d) => +d.y) * .95;
+            var yMax = d3.max(data, (d) => +d.y) * 1.05;
             yScale.range([chartHeight, 0]).domain([yMin, yMax]);
 
             // Update axes
@@ -110,9 +110,9 @@ var ScatterPlot = function() {
     			.attr('cx', (d) => xScale(d.x))
                 .on('mouseover', tip.show)
                 .on('mouseout', tip.hide)
-                .attr('r', 5)
                 // Transition properties of the + update selections
                 .merge(circles)
+                .attr('r', radius)
     			.transition()
     			.duration(1500)
                 .delay((d) => xScale(d.x) * 5)
@@ -152,6 +152,11 @@ var ScatterPlot = function() {
     chart.yTitle = function(value){
         if (!arguments.length) return yTitle;
         yTitle = value;
+        return chart;
+    };
+    chart.radius = function(value){
+        if (!arguments.length) return radius;
+        radius = value;
         return chart;
     };
 

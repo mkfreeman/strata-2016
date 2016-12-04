@@ -19,7 +19,8 @@ var ScatterPlotComponent = React.createClass({
             .height(window.innerHeight - 130)
             .fill('blue')
             .xTitle(this.props.xTitle)
-            .yTitle(this.props.yTitle);
+            .yTitle(this.props.yTitle)
+            .radius((d) => d.selected == true ? 6 : 1);
 
         // Call d3 update
         d3.select(this.root)
@@ -28,7 +29,6 @@ var ScatterPlotComponent = React.createClass({
     },
     // Update on new props
     componentWillReceiveProps (props){
-        console.log('props')
         this.props = props;
         this.update();
     },

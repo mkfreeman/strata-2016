@@ -1,78 +1,50 @@
 // Application
 import React from 'react';
 import * as d3 from 'd3';
-import ScatterPlotComponent from './ScatterPlotComponent'
+import './App.css';
+import TextPlotComponent from './TextPlotComponent'
 import Controls from './Controls';
 
 var App = React.createClass({
     getInitialState() {
         return {
-            data:[],
-            xVar:'fertility_rate',
-            yVar:'life_expectancy',
-            idVar:'country',
-            search:''
+            numParagraphs:4,
+            color:'red',
+            fontSize:18
         }
     },
-    componentWillMount() {
-        // Get data
-        d3.csv('data/prepped_data.csv', function(data){
-            this.setState({data:data})
-        }.bind(this))
+    changeColor(event, value) {
+        this.setState({color:value})
     },
-    changeX(event, index, value) {
-        this.setState({xVar:value})
+    changeFontSize(event, value) {
+        this.setState({fontSize:value})
     },
-    changeY(event, index, value) {
-        this.setState({yVar:value})
-    },
-    search(event) {
-        this.setState({search:event.target.value.toLowerCase()})
-
+    changeParagraphs(event, value) {
+        this.setState({numParagraphs:value})
     },
 	render() {
         // Prep data
-        let chartData = this.state.data.filter((d) => d[this.state.idVar].toLowerCase().match(this.state.search) !== null ).map((d) => {
-            return {
-                x:d[this.state.xVar],
-                y:d[this.state.yVar],
-                id:d[this.state.idVar]
-            }
+        let textData = d3.range(0, this.state.numParagraphs).map(function(d,i) {
+            return {id:i, text:'Paragraph Number ' + (i + 1)}
         });
-
-        let titleMap = {
-            gdp:'Gross Domestic Product',
-            life_expectancy:'Life expectancy in 2014',
-            fertility_rate:'Fertility Rate'
-        };
-
-        let titles = {
-            x:titleMap[this.state.xVar],
-            y:titleMap[this.state.yVar]
-        }
 
 		// Return ScatterPlot element
 		return (
 
-            <div>
+            <div className="app">
                 <Controls
-                    changeX={this.changeX}
-                    changeY={this.changeY}
-                    xVar={this.state.xVar}
-                    yVar={this.state.yVar}
-                    search={this.search}
+                    changeColor={this.changeColor}
+                    color={this.state.color}
+                    fontSize={this.state.fontSize}
+                    numParagraphs={this.state.numParagraphs}
+                    changeFontSize={this.changeFontSize}
+                    changeParagraphs={this.changeParagraphs}
                 />
-                {this.state.data.length &&
-                    <div className="App">
-                        <ScatterPlotComponent
-                            xTitle={titles.x}
-                            yTitle={titles.y}
-                            search={this.state.search}
-                            data={chartData}
-                            width={window.innerWidth * .7}
-                            height={window.innerHeight * .9} />
-                    </div>
-                }
+                <TextPlotComponent
+                    data={textData}
+                    color={this.state.color}
+                    fontSize={this.state.fontSize}
+                />
             </div>
 		);
 	}
