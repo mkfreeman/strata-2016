@@ -1,2 +1,4 @@
-# Exercise-4
-This exercise demonstrates the use of D3 in conjunction with react. Because this project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app), you'll need to run `npm install` inside the project directory to install necessary packages. Then start your server by running `npm start`.
+# Demo-3
+In this demo, we'll take a look at a simple example of passing props to a component.
+
+As described in [module-4](https://github.com/info343c-a16/m4-git-intro), start by forking and cloning this repository to have your own copy of this repo.

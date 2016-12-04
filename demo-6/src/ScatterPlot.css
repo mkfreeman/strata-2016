@@ -1,0 +1,12 @@
+
+.chart-title {
+    text-anchor:middle;
+    font-weight:bold;
+}
+
+.title {
+    text-anchor:middle;
+}
+.chart {
+    display:inline-block;
+}

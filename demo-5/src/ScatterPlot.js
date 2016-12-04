@@ -15,8 +15,8 @@ var ScatterPlot = function() {
         margin = {
             left:70,
             bottom:50,
-            top:30,
-            right:10,
+            top:0,
+            right:50,
         };
 
     // Function returned by ScatterPlot
@@ -26,8 +26,7 @@ var ScatterPlot = function() {
         var chartWidth = width - margin.left - margin.right;
 
         // Iterate through selections, in case there are multiple
-        selection.each(function(allData){
-            let data = allData.values;
+        selection.each(function(data){
 
             // Use the data-join to create the svg (if necessary)
             var ele = d3.select(this);
@@ -39,12 +38,6 @@ var ScatterPlot = function() {
                             .attr('width', width)
                             .attr("height", height)
                             .append("g");
-
-            // Title G
-            gEnter.append('text')
-                 .attr('transform', 'translate(' + (margin.left + chartWidth/2) + ',' + 20 + ')')
-                 .text(allData.key)
-                 .attr('class', 'chart-title')
 
             // g element for markers
             gEnter.append('g')
@@ -68,15 +61,14 @@ var ScatterPlot = function() {
                 .attr('transform', 'translate(' + (margin.left + chartWidth/2) + ',' + (chartHeight + margin.top + 40) + ')')
                 .attr('class', 'title x');
 
-
             // Add a title g for the y axis
             gEnter.append('text')
                 .attr('transform', 'translate(' + (margin.left - 40) + ',' + (margin.top + chartHeight/2) + ') rotate(-90)')
                 .attr('class', 'title y');
 
             // Define xAxis and yAxis functions
-            var xAxis = d3.axisBottom().tickFormat(d3.format('.2s'));
-            var yAxis = d3.axisLeft().tickFormat(d3.format('.2s'));
+            var xAxis = d3.axisBottom();
+            var yAxis = d3.axisLeft();
 
             // // Define a hover
             var tip = d3tip()
@@ -117,7 +109,7 @@ var ScatterPlot = function() {
     			.style('opacity', .3)
     			.attr('cx', (d) => xScale(d.x))
                 .on('mouseover', tip.show)
-                .on('mouseout', tip.hide)                
+                .on('mouseout', tip.hide)
                 // Transition properties of the + update selections
                 .merge(circles)
                 .attr('r', radius)
