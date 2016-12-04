@@ -31,7 +31,7 @@ var SmallMultiples = React.createClass({
         charts.enter()
             .append('div')
             .attr('class', 'chart')
-            .merge(charts)
+            .merge(charts)            
             .call(this.scatter);
 
         charts.exit().remove()
