@@ -5,6 +5,14 @@
   stroke: #000;
 }
 
+.header {
+    font-weight: 300;
+}
+
+h1.header {
+    border-bottom: 1px solid #d3d3d3;
+}
+
 .title {
 	text-anchor:middle;
 }

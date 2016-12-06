@@ -8,15 +8,15 @@ import ScatterPlot from './ScatterPlot';
 var ScatterPlotComponent = React.createClass({
     componentDidMount(){
         // Define scatterplot function
-        this.scatter = ScatterPlot()
-        this.update()
+        this.scatter = ScatterPlot();
+        this.update();
     },
     // Create chart
     update() {
         // Update parameters
         this.scatter
-            .width(window.innerWidth * .9)
-            .height(window.innerHeight - 130)
+            .width(this.props.width)
+            .height(this.props.height)
             .fill('blue')
             .xTitle(this.props.xTitle)
             .yTitle(this.props.yTitle)
@@ -36,7 +36,9 @@ var ScatterPlotComponent = React.createClass({
 	render() {
 		// Expose HTML node via ref property
 		return (
-            <div width={this.props.width}
+            <div
+                className="chart"
+                width={this.props.width}
                 height={this.props.height}
                 ref={(node) => { this.root = node;}}
             />

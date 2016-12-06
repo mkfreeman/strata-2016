@@ -32,6 +32,7 @@ var App = React.createClass({
 		return (
 
             <div className="app">
+                <h1 className="header">Demo 3</h1>
                 <Controls
                     changeColor={this.changeColor}
                     color={this.state.color}

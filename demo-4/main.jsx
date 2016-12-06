@@ -12,7 +12,7 @@ var InputComponent = React.createClass({
     render:function() {
         return (
             <div>
-                <input onChange={this.update} />
+                <input placeholder="Start typing..." onChange={this.update} />
                 <br/>
                 <text>The user has typed: {this.state.text}</text>
             </div>

@@ -1,5 +1,4 @@
 // Wait for page to load
-var person1;
 $(function() {
 	// Create sample people
 	person1 = newPerson() // returns our person function

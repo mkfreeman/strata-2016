@@ -2,3 +2,9 @@
 .complete {
     text-decoration:line-through;
 }
+
+.header {
+    font-weight: 300;
+    font-size:32px;
+    border-bottom:1px solid #d3d3d3;
+}

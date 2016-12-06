@@ -1,6 +1,7 @@
 // Application
 import React from 'react';
 import * as d3 from 'd3';
+import './App.css';
 import ScatterPlotComponent from './ScatterPlotComponent'
 import Controls from './Controls';
 
@@ -57,6 +58,7 @@ var App = React.createClass({
 		return (
 
             <div>
+                <h1 className="header">Demo 5</h1>
                 <Controls
                     changeX={this.changeX}
                     changeY={this.changeY}
@@ -72,7 +74,7 @@ var App = React.createClass({
                             search={this.state.search}
                             data={chartData}
                             width={window.innerWidth * .7}
-                            height={window.innerHeight * .9} />
+                            height={window.innerHeight - 220} />
                     </div>
                 }
 
