@@ -2,6 +2,7 @@
   "name": "exercise-4",
   "version": "0.1.0",
   "private": true,
+  "homepage":"http://mfviz.com/strata-2016/demo-3",
   "devDependencies": {
     "react-scripts": "0.7.0"
   },
